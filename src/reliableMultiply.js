@@ -1,8 +1,8 @@
 function reliableMultiply(a, b) {
-    for(;;){
-        let  result = primitiveMultiply(a, b)
-        if (result) return result;
-    }
+  for (;;) {
+    let result = primitiveMultiply(a, b)
+    if (result) return result;
+  }
 };
 
 function MultiplicatorUnitFailure() {}

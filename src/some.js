@@ -1,5 +1,5 @@
 function some(array, func) {
-    for (let item of array){
+    for (let item of array) {
         if (func(item)) return true;
     }
     return false;
