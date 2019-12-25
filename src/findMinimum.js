@@ -1,11 +1,10 @@
 function findMinimum(firstNumber, secondMinimum) {
-    return (isNaN(firstNumber)) | (isNaN(secondMinimum)) 
-        ? console.log('Аргументы должны быть числами')
-        : firstNumber === secondMinimum 
-            ? console.log('Числа равны')
-            : firstNumber > secondMinimum
-                ? console.log(secondMinimum)
-                : console.log(firstNumber);
+    if (firstNumber > secondMinimum) return secondMinimum;
+
+    return firstNumber;
 };
 
-findMinimum(-2, -3);
+console.log("Из чисел 0 и 0 меньшше равно " + findMinimum(0, 0));
+console.log("Из чисел 1 и 2 меньшше равно " + findMinimum(1, 2));
+console.log("Из чисел -10 и -9 меньшше равно " + findMinimum(-10,-9));
+console.log("Из чисел -20 и 2 меньшше равно " + findMinimum(-20, 2));
