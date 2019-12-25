@@ -1,11 +1,12 @@
-function isEven (number) {
-    return number === 0
-        ? true
-        : number === 1 
-            ? false
-            : number < 0
-                ? isEven(-number)
-                : isEven(number - 2);            
+function isEven(number) {
+    if (number === 0) return true;
+    if (number === 1) return false;
+    if (number < 0 ) {
+        return isEven(-number);
+    } else return isEven(number - 2);            
 }
 
-console.log(isEven(-1));
+console.log("Число -32 четное : " + isEven(-32));
+console.log("Число 32 четное : " + isEven(32));
+console.log("Число -33 четное : " + isEven(-33));
+console.log("Число 32 четное : " + isEven(33));
