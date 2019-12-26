@@ -313,11 +313,6 @@ let ancestry = [{
 ];
 
 function getLifeSpan() {
-    let newAn = ancestry.map(function (item) {
-        item.life = item.died - item.born;
-        item.centuries = Math.ceil(item.died / 100);
-        return item
-    });
 
     function average(array) {
         function plus(a, b) {
@@ -326,18 +321,63 @@ function getLifeSpan() {
         return array.reduce(plus) / array.length;
     };
 
-    function getLifeSpanInCenturie(centurie) {
-        let result = [];
+    function createObject() {
+        return {
+            16:[],
+            17:[],
+            18:[],
+            19:[],
+            20:[],
+            21:[]
+        };
+    };
 
-        newAn.forEach(function (item) {
-            if (item.centuries === centurie) {
-                result.push(item.life);
-            }
+    function defineCentury(person) {
+        return person.map(function (item) {
+            item.life = item.died - item.born;
+            item.centuries = Math.ceil(item.died / 100);
+            return item;
+        });
+    };
+
+    function groupBy(array, fn) {
+        let object = createObject();
+        let keys = Object.keys(object);
+        let newAn = fn(array);
+
+        newAn.forEach(function(person) {
+            if(keys.map((num) => parseInt(num))
+                    .includes(person.centuries)) object[person.centuries].push(person.name)
+        })
+        
+        return object;
+    };
+    
+    function getLifeSpanInCenturie(centuries) {
+        let object = createObject();
+        let keys = Object.keys(object);
+        let newAn = defineCentury(centuries);
+
+        newAn.forEach(function(person) {
+            if(keys.map((num) => parseInt(num))
+                    .includes(person.centuries)) object[person.centuries].push(person.died - person.born)
         });
 
-        return average(result);
+        for (key in object) {
+            object[key] = average(object[key]);
+        }
+        return object;
     }
-    console.log(getLifeSpanInCenturie(19));
-}
+    console.log(getLifeSpanInCenturie(ancestry));
+    console.log(groupBy(ancestry, defineCentury));
+};
+
+function defineCentury(person) {
+    
+};
+
+function groupBy() {
+    
+};
 
 getLifeSpan();
