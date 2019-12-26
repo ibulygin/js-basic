@@ -4,4 +4,4 @@ function replaceQuotes(str) {
     return str.replace(regExp, '$1"$2');
 };
 
-console.log(replaceQuotes("Hello? Are'yuo fine 'hi'"));
+console.log(replaceQuotes("Hello? Are'you fine 'hi'"));

@@ -312,72 +312,64 @@ let ancestry = [{
     }
 ];
 
-function getLifeSpan() {
-
-    function average(array) {
-        function plus(a, b) {
-            return a + b;
-        }
-        return array.reduce(plus) / array.length;
-    };
-
-    function createObject() {
-        return {
-            16:[],
-            17:[],
-            18:[],
-            19:[],
-            20:[],
-            21:[]
-        };
-    };
-
-    function defineCentury(person) {
-        return person.map(function (item) {
-            item.life = item.died - item.born;
-            item.centuries = Math.ceil(item.died / 100);
-            return item;
-        });
-    };
-
-    function groupBy(array, fn) {
-        let object = createObject();
-        let keys = Object.keys(object);
-        let newAn = fn(array);
-
-        newAn.forEach(function(person) {
-            if(keys.map((num) => parseInt(num))
-                    .includes(person.centuries)) object[person.centuries].push(person.name)
-        })
-        
-        return object;
-    };
-    
-    function getLifeSpanInCenturie(centuries) {
-        let object = createObject();
-        let keys = Object.keys(object);
-        let newAn = defineCentury(centuries);
-
-        newAn.forEach(function(person) {
-            if(keys.map((num) => parseInt(num))
-                    .includes(person.centuries)) object[person.centuries].push(person.died - person.born)
-        });
-
-        for (key in object) {
-            object[key] = average(object[key]);
-        }
-        return object;
+function average(array) {
+    function plus(a, b) {
+        return a + b;
     }
-    console.log(getLifeSpanInCenturie(ancestry));
-    console.log(groupBy(ancestry, defineCentury));
+    return array.reduce(plus) / array.length;
+};
+
+function createObjectCentury() {
+    return {
+        16: [],
+        17: [],
+        18: [],
+        19: [],
+        20: [],
+        21: []
+    };
 };
 
 function defineCentury(person) {
-    
+    return person.map(function (item) {
+        item.life = item.died - item.born;
+        item.centuries = Math.ceil(item.died / 100);
+        return item;
+    });
 };
 
-function groupBy() {
-    
+function groupBy(array, fn) {
+    const keys = Object.keys(objectCentury);
+
+    let objectCentury = createObjectCentury();
+    let newAn = fn(array);
+
+    newAn.forEach(function (person) {
+        if (keys.map((num) => parseInt(num))
+            .includes(person.centuries)) objectCentury[person.centuries].push(person.name);
+    })
+
+    return objectCentury;
 };
 
-getLifeSpan();
+function getLifeSpanInCenturie(centuries) {
+    const keys = Object.keys(objectCentury);
+
+    let objectCentury = createObjectCentury();
+    let newAn = defineCentury(centuries);
+
+    newAn.forEach(function (person) {
+        if (keys.map((num) => parseInt(num))
+            .includes(person.centuries)) objectCentury[person.centuries].push(person.died - person.born);
+    });
+
+    for (key in objectCentury) {
+        objectCentury[key] = average(objectCentury[key]);
+    }
+    return objectCentury;
+};
+
+console.log("Средняя продолжительность жизни на каждое поколение: ");
+console.log(getLifeSpanInCenturie(ancestry));
+console.log("Люди распределенные по поколениям: ");
+console.log(groupBy(ancestry, defineCentury));
