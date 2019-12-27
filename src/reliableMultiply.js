@@ -1,7 +1,11 @@
 function reliableMultiply(a, b) {
   for (;;) {
-    let result = primitiveMultiply(a, b)
-    if (result) return result;
+    try {
+      return primitiveMultiply(a, b);
+    } catch (error) {
+      if (!(error instanceof MultiplicatorUnitFailure))
+        throw error;
+    }
   }
 };
 
@@ -14,4 +18,6 @@ function primitiveMultiply(a, b) {
     throw new MultiplicatorUnitFailure();
 };
 
-console.log(reliableMultiply(8, 8));
+for (let i = 1; i < 50; i++) {
+  console.log(reliableMultiply(8, 8));
+};

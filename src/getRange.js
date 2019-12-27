@@ -26,3 +26,5 @@ console.log(getRange(1, 10, 2));
 //[1, 3, 5, 7, 9]
 console.log(getRange(5, 2, -1));
 // [5, 4, 3, 2].
+console.log(sum(getRange(1, 10, 1)));
+// → 55

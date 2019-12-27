@@ -7,12 +7,12 @@ function drawСhessСheck() {
 
     for (let j = 0; j < boardSideSize; j++) {
         for (let i = 0; i < boardSideSize; i++) {
-            if (!((j + i) % 2)){
+            if (!((j + i) % 2)) {
                 board += blackCell;
             }
             board += whiteCell;
         }
-        board += "\n"; 
+        board += "\n";
     }
     console.log(board)
 };

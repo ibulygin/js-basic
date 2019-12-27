@@ -339,28 +339,26 @@ function defineCentury(person) {
 };
 
 function groupBy(array, fn) {
-    const keys = Object.keys(objectCentury);
-
     let objectCentury = createObjectCentury();
+    let keys = Object.keys(objectCentury);
     let newAn = fn(array);
 
     newAn.forEach(function (person) {
         if (keys.map((num) => parseInt(num))
-            .includes(person.centuries)) objectCentury[person.centuries].push(person.name);
+            .includes(person.centuries)) objectCentury[person.centuries].push(person.name)
     })
 
     return objectCentury;
 };
 
 function getLifeSpanInCenturie(centuries) {
-    const keys = Object.keys(objectCentury);
-
     let objectCentury = createObjectCentury();
+    let keys = Object.keys(objectCentury);
     let newAn = defineCentury(centuries);
 
     newAn.forEach(function (person) {
         if (keys.map((num) => parseInt(num))
-            .includes(person.centuries)) objectCentury[person.centuries].push(person.died - person.born);
+            .includes(person.centuries)) objectCentury[person.centuries].push(person.died - person.born)
     });
 
     for (key in objectCentury) {
@@ -370,6 +368,6 @@ function getLifeSpanInCenturie(centuries) {
 };
 
 console.log("Средняя продолжительность жизни на каждое поколение: ");
-console.log(getLifeSpanInCenturie(ancestry));
+console.log(getLifeSpanInCenturie(ancestry))
 console.log("Люди распределенные по поколениям: ");
 console.log(groupBy(ancestry, defineCentury));
